@@ -1,0 +1,49 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2821
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 import bpy\
+import math\
+\
+#intialise parameters \
+\
+verts_count = 30\
+\
+\
+#divide verts_count by the circe \
+angle_step = 2 * math.pi / verts_count\
+\
+verts_coordinates = list()\
+\
+radius = 2\
+\
+\
+#caluclate cordinates \
+\
+#use verts_count as the number that you put into the range \
+for i in range(verts_count):\
+\
+    current_angle =   i * angle_step\
+\
+    x = radius * math.sin(current_angle) \
+\
+    y = radius * math.cos(current_angle) \
+    \
+    \
+\
+    \
+   #visualise what we are doing \
+\
+ bpy.ops.mesh.primitive_ico_sphere_add(radius=0.1, location=(x, y, 0))\
+         \
+    \
+    for i in range(3):\
+    mod = i.modifiers.new('Array', 'ARRAY')\
+    mod.relative_offset_displace[0] = 0\
+    mod.relative_offset_displace[i] = 1.1\
+    mod.count = dimensions[i]\
+    bpy.ops.object.modifier_apply(modifier='Array')\
+bpy.ops.mesh.separate(type='LOOSE')}
